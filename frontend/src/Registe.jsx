@@ -15,17 +15,22 @@ export default function Register() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/register", {
-        name,
-        mobile,
-        university
-      });
+
+      await axios.post(
+        "https://student-data-qr-backend.vercel.app/register",
+        {
+          name,
+          mobile,
+          university
+        }
+      );
 
       alert("Form submitted successfully");
       setName("");
       setMobile("");
       setUniversity("");
     } catch (error) {
+      console.error(error);
       alert("Error submitting form");
     } finally {
       setLoading(false);
@@ -40,21 +45,21 @@ export default function Register() {
         </h2>
 
         <input
-          className="w-full mb-4 p-3 border rounded-lg"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
-          className="w-full mb-4 p-3 border rounded-lg"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Mobile Number"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
         />
 
         <input
-          className="w-full mb-6 p-3 border rounded-lg"
+          className="w-full mb-6 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="University Name"
           value={university}
           onChange={(e) => setUniversity(e.target.value)}
