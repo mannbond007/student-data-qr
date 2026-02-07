@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { User, Phone, GraduationCap, Loader2 } from "lucide-react";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -15,63 +16,111 @@ export default function Register() {
 
     try {
       setLoading(true);
-
       await axios.post(
         "https://student-data-qr-backend.vercel.app/register",
-        {
-          name,
-          mobile,
-          university
-        }
+        { name, mobile, university }
       );
 
-      alert("Form submitted successfully");
+      alert("Registration successful");
       setName("");
       setMobile("");
       setUniversity("");
     } catch (error) {
-      console.error(error);
-      alert("Error submitting form");
+      alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
+    <div className="min-h-screen w-full bg-[#020617] relative flex items-center justify-center px-4">
+
+      {/* 🔷 Premium Medical Grid + Orb Background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "#020617",
+          backgroundImage: `
+            linear-gradient(to right, rgba(71,85,105,0.15) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(71,85,105,0.15) 1px, transparent 1px),
+            radial-gradient(circle at 50% 60%, rgba(59,130,246,0.18) 0%, rgba(14,165,233,0.08) 40%, transparent 70%)
+          `,
+          backgroundSize: "40px 40px, 40px 40px, 100% 100%",
+        }}
+      />
+
+      {/* 🩺 Dark Glassmorphism Card */}
+      <div className="relative z-10 w-full max-w-sm sm:max-w-md rounded-2xl border border-slate-700/60 bg-slate-900/80 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-6 sm:p-8">
+
+        {/* Brand */}
+        <div className="text-center mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-blue-400">
+            MBBS Route
+          </h1>
+          <p className="text-slate-400 text-sm mt-1">
+            Medical Admissions • Trusted Guidance
+          </p>
+        </div>
+
+        {/* Title */}
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-100 text-center mb-6">
           Student Registration
         </h2>
 
-        <input
-          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        {/* Name */}
+        <div className="relative mb-4">
+          <User className="absolute left-3 top-3.5 text-slate-400" size={20} />
+          <input
+            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
-        <input
-          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Mobile Number"
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
-        />
+        {/* Mobile */}
+        <div className="relative mb-4">
+          <Phone className="absolute left-3 top-3.5 text-slate-400" size={20} />
+          <input
+            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            placeholder="Mobile Number"
+            inputMode="numeric"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
+          />
+        </div>
 
-        <input
-          className="w-full mb-6 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="University Name"
-          value={university}
-          onChange={(e) => setUniversity(e.target.value)}
-        />
+        {/* University */}
+        <div className="relative mb-6">
+          <GraduationCap className="absolute left-3 top-3.5 text-slate-400" size={20} />
+          <input
+            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            placeholder="interested Course"
+            value={university}
+            onChange={(e) => setUniversity(e.target.value)}
+          />
+        </div>
 
+        {/* Submit Button */}
         <button
           onClick={submitForm}
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-xl font-medium text-sm sm:text-base hover:bg-blue-700 transition disabled:opacity-60"
         >
-          {loading ? "Submitting..." : "Submit"}
+          {loading ? (
+            <>
+              <Loader2 className="animate-spin" size={18} />
+              Submitting...
+            </>
+          ) : (
+            "Submit Registration"
+          )}
         </button>
+
+        {/* Footer */}
+        <p className="text-[11px] sm:text-xs text-slate-500 text-center mt-6">
+          © {new Date().getFullYear()} MBBS Route. All rights reserved.
+        </p>
       </div>
     </div>
   );
