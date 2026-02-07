@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Register from "./Registe";
-
+import Register from "./Register";
 
 export default function App() {
   return (
