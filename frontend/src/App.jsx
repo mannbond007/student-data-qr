@@ -1,14 +1,19 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Register from "./Registe";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./Register";
+import User from "./User";
+
+
 
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Navigate to="/register" />} />
-      </Routes>
+  <Route path="/" element={<Register />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/users" element={<User />} />
+</Routes>
+
     </BrowserRouter>
   );
 }

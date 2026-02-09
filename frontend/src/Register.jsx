@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { User, Phone, GraduationCap, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ export default function Register() {
   return (
     <div className="min-h-screen w-full bg-[#020617] relative flex items-center justify-center px-4">
 
-      {/* 🔷 Premium Medical Grid + Orb Background */}
+      {/* Background */}
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -49,21 +50,15 @@ export default function Register() {
         }}
       />
 
-      {/* 🩺 Dark Glassmorphism Card */}
-      <div className="relative z-10 w-full max-w-sm sm:max-w-md rounded-2xl border border-slate-700/60 bg-slate-900/80 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-6 sm:p-8">
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-md rounded-2xl border border-slate-700/60 bg-slate-900/80 backdrop-blur-xl shadow-xl p-8">
 
-        {/* Brand */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-blue-400">
-            MBBS Route
-          </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Medical Admissions • Trusted Guidance
-          </p>
+          <h1 className="text-3xl font-bold text-blue-400">MBBS Route</h1>
+          <p className="text-slate-400 text-sm">Medical Admissions</p>
         </div>
 
-        {/* Title */}
-        <h2 className="text-lg sm:text-xl font-semibold text-slate-100 text-center mb-6">
+        <h2 className="text-xl font-semibold text-white text-center mb-6">
           Student Registration
         </h2>
 
@@ -71,7 +66,7 @@ export default function Register() {
         <div className="relative mb-4">
           <User className="absolute left-3 top-3.5 text-slate-400" size={20} />
           <input
-            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            className="w-full pl-10 py-3 rounded-xl bg-slate-800 text-white border border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"
             placeholder="Full Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -82,9 +77,8 @@ export default function Register() {
         <div className="relative mb-4">
           <Phone className="absolute left-3 top-3.5 text-slate-400" size={20} />
           <input
-            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+            className="w-full pl-10 py-3 rounded-xl bg-slate-800 text-white border border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"
             placeholder="Mobile Number"
-            inputMode="numeric"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
           />
@@ -94,32 +88,32 @@ export default function Register() {
         <div className="relative mb-6">
           <GraduationCap className="absolute left-3 top-3.5 text-slate-400" size={20} />
           <input
-            className="w-full pl-10 pr-3 py-3 rounded-xl bg-slate-800/70 text-slate-100 placeholder-slate-400 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-            placeholder="interested Course"
+            className="w-full pl-10 py-3 rounded-xl bg-slate-800 text-white border border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="Interested Course"
             value={university}
             onChange={(e) => setUniversity(e.target.value)}
           />
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           onClick={submitForm}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-xl font-medium text-sm sm:text-base hover:bg-blue-700 transition disabled:opacity-60"
+          className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-xl flex justify-center gap-2"
         >
-          {loading ? (
-            <>
-              <Loader2 className="animate-spin" size={18} />
-              Submitting...
-            </>
-          ) : (
-            "Submit Registration"
-          )}
+          {loading ? <Loader2 className="animate-spin" /> : "Submit Registration"}
         </button>
 
-        {/* Footer */}
-        <p className="text-[11px] sm:text-xs text-slate-500 text-center mt-6">
-          © {new Date().getFullYear()} MBBS Route. All rights reserved.
+        {/* Show Users */}
+        <Link
+          to="/users"
+          className="block text-center mt-4 text-blue-400 hover:text-blue-300"
+        >
+          View Registered Students →
+        </Link>
+
+        <p className="text-xs text-slate-500 text-center mt-6">
+          © {new Date().getFullYear()} MBBS Route
         </p>
       </div>
     </div>
